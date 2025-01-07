@@ -23,9 +23,11 @@ public class BaseSpec {
 
     public static ResponseSpecification responseSpecBadRequest = new ResponseSpecBuilder()
             .expectStatusCode(400)
+            .log(LogDetail.BODY)
             .build();
 
     public static ResponseSpecification responseSpecNotFound = new ResponseSpecBuilder()
             .expectStatusCode(404)
+            .log(LogDetail.BODY)
             .build();
 }
