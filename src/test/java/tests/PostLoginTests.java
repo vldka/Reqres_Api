@@ -1,13 +1,14 @@
 package tests;
 
 import io.restassured.http.ContentType;
-import io.restassured.response.Response;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.is;
 import static org.hamcrest.core.IsEqual.equalTo;
+import static org.hamcrest.core.IsNull.notNullValue;
 
 @Tag("API-TEST")
 @DisplayName("Тестирование Post")
@@ -19,7 +20,7 @@ public class PostLoginTests extends TestBase {
                 "  \"email\": \"eve.holt@reqres.in\",\n" +
                 "  \"password\": \"cityslicka\"\n" +
                 "}";
-         given()
+        given()
                 .body(bodyJSON)
                 .contentType(ContentType.JSON)
                 .when()
@@ -27,18 +28,8 @@ public class PostLoginTests extends TestBase {
                 .post("login")
                 .then()
                 .log().body()
-                .statusCode(200);
-
-        Response response = given()
-                .body(bodyJSON)
-                .contentType(ContentType.JSON)
-                .when()
-                .post("https://reqres.in/api/login");
-        if (response.jsonPath().get("token").toString().isEmpty()) {
-            System.out.println("Поле 'token' пустое");
-        } else {
-            System.out.println("Поле 'token' не пустое");
-        }
+                .statusCode(200)
+                .body("token", is(notNullValue()));
     }
 
     @Test
