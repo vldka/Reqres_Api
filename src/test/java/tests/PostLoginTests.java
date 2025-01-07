@@ -47,7 +47,6 @@ public class PostLoginTests extends TestBase {
                 step("Отправляем запрос на авторизацию", () ->
                         given(requestSpec)
                                 .body(authData)
-                                .contentType(ContentType.JSON)
                                 .when()
                                 .log().uri()
                                 .post("login")
@@ -68,7 +67,6 @@ public class PostLoginTests extends TestBase {
         LoginResponseBody response =
                 given(requestSpec)
                         .body(authData)
-                        .contentType(ContentType.JSON)
                         .when()
                         .post("login")
                         .then()
