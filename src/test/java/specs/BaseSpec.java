@@ -13,20 +13,19 @@ public class BaseSpec {
     public static RequestSpecification requestSpec = new RequestSpecBuilder()
             .setContentType(JSON)
             .addFilter(withCustomTemplates())
-            .log(LogDetail.ALL)
+            .log(LogDetail.URI)
+            .log(LogDetail.HEADERS)
             .build();
     public static ResponseSpecification responseSpecSuccess = new ResponseSpecBuilder()
             .expectStatusCode(200)
-            .log(LogDetail.ALL)
+            .log(LogDetail.BODY)
             .build();
 
     public static ResponseSpecification responseSpecBadRequest = new ResponseSpecBuilder()
             .expectStatusCode(400)
-            .log(LogDetail.ALL)
             .build();
 
     public static ResponseSpecification responseSpecNotFound = new ResponseSpecBuilder()
             .expectStatusCode(404)
-            .log(LogDetail.ALL)
             .build();
 }
