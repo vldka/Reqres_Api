@@ -5,7 +5,6 @@ import lombok.Data;
 import lombok.Getter;
 
 @Data
-@Getter
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class LoginResponseBody {
     private String token;

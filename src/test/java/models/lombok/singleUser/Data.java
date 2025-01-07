@@ -1,10 +1,8 @@
 package models.lombok.singleUser;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.Getter;
 
 @lombok.Data
-@Getter
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Data {
     private Integer id;

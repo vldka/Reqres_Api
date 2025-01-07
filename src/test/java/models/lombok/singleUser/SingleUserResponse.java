@@ -5,7 +5,6 @@ import lombok.Data;
 import lombok.Getter;
 
 @Data
-@Getter
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class SingleUserResponse {
     private models.lombok.singleUser.Data data;
