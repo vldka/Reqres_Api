@@ -11,6 +11,7 @@ import static io.qameta.allure.Allure.step;
 import static io.restassured.RestAssured.given;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static specs.BaseSpec.*;
 
 @Tag("API-TEST")
 @DisplayName("Тестирование Post")
@@ -23,15 +24,13 @@ public class PostLoginTests extends TestBase {
         authData.setPassword("cityslicka");
         LoginResponseBody response =
                 step("Отправляем запрос на авторизацию", () ->
-                        given()
+                        given(requestSpec)
                                 .body(authData)
                                 .contentType(ContentType.JSON)
                                 .when()
-                                .log().uri()
                                 .post("login")
                                 .then()
-                                .log().body()
-                                .statusCode(200)
+                                .spec(responseSpecSuccess)
                                 .extract()
                                 .as(LoginResponseBody.class));
         step("Проверяем token на заполнение", () ->
@@ -46,7 +45,7 @@ public class PostLoginTests extends TestBase {
         authData.setPassword("cityslicka");
         LoginResponseBody response =
                 step("Отправляем запрос на авторизацию", () ->
-                        given()
+                        given(requestSpec)
                                 .body(authData)
                                 .contentType(ContentType.JSON)
                                 .when()
@@ -54,7 +53,7 @@ public class PostLoginTests extends TestBase {
                                 .post("login")
                                 .then()
                                 .log().body()
-                                .statusCode(400)
+                                .spec(responseSpecBadRequest)
                                 .extract()
                                 .as(LoginResponseBody.class));
         step("Проверяем ошибку user not found", () ->
@@ -67,15 +66,13 @@ public class PostLoginTests extends TestBase {
         LoginRequestBody authData = new LoginRequestBody();
         authData.setEmail("peter@klaven");
         LoginResponseBody response =
-                given()
+                given(requestSpec)
                         .body(authData)
                         .contentType(ContentType.JSON)
                         .when()
-                        .log().uri()
                         .post("login")
                         .then()
-                        .log().body()
-                        .statusCode(400)
+                        .spec(responseSpecBadRequest)
                         .extract()
                         .as(LoginResponseBody.class);
         step("Проверяем ошибку Missing password", () ->

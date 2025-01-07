@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import static io.qameta.allure.Allure.step;
 import static io.restassured.RestAssured.given;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static specs.BaseSpec.*;
 
 @Tag("API-TEST")
 @DisplayName("Тестирование GET")
@@ -17,13 +18,11 @@ public class GetUsersApiTests extends TestBase {
     public void testGetRequestSuccefull() {
         SingleUserResponse response =
                 step("Отправляем запрос на информацию о пользователе", () ->
-                        given()
+                        given(requestSpec)
                                 .when()
-                                .log().uri()
                                 .get("users/2")
                                 .then()
-                                .statusCode(200)
-                                .log().body()
+                                .spec(responseSpecSuccess)
                                 .extract()
                                 .as(SingleUserResponse.class)
                 );
@@ -36,12 +35,10 @@ public class GetUsersApiTests extends TestBase {
     @Test
     @DisplayName("Проверка Api GET Single User Отсутствует пользователь")
     public void testGetRequestNotFoundUser() {
-        given()
+        given(requestSpec)
                 .when()
-                .log().uri()
                 .get("users/23")
                 .then()
-                .log().body()
-                .statusCode(404);
+                .spec(responseSpecNotFound);
     }
 }
