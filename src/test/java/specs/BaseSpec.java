@@ -21,6 +21,7 @@ public class BaseSpec {
     public static ResponseSpecification getResponseSpecification(int responseCode) {
         ResponseSpecification responseSpec = new ResponseSpecBuilder()
                 .expectStatusCode(responseCode)
+                .log(LogDetail.BODY)
                 .build();
         return responseSpec;
     }
