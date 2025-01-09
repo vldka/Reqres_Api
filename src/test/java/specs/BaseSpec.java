@@ -20,7 +20,6 @@ public class BaseSpec {
     public static ResponseSpecification responseSpecSuccess = new ResponseSpecBuilder()
             .expectStatusCode(200)
             .log(LogDetail.URI)
-            .log(LogDetail.HEADERS)
             .log(LogDetail.BODY)
             .build();
 
