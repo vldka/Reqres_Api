@@ -1,6 +1,6 @@
 package tests;
 
-import models.singleUser.SingleUserResponse;
+import models.singleUser.SingleUserBodyResponse;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -16,7 +16,7 @@ public class GetUsersApiTests extends TestBase {
     @Test
     @DisplayName("Проверка Api GET Single User")
     public void testGetRequestSuccefull() {
-        SingleUserResponse response =
+        SingleUserBodyResponse response =
                 step("Отправляем запрос на информацию о пользователе", () ->
                         given(requestSpec)
                                 .when()
@@ -24,7 +24,7 @@ public class GetUsersApiTests extends TestBase {
                                 .then()
                                 .spec(responseSpecSuccess)
                                 .extract()
-                                .as(SingleUserResponse.class)
+                                .as(SingleUserBodyResponse.class)
                 );
         step("Проверяем поля id и text", () -> {
             assertEquals(2, response.getData().getId());
