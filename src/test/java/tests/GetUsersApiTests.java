@@ -4,6 +4,7 @@ import models.singleUser.SingleUserBodyResponse;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+import specs.BaseSpec;
 
 import static io.qameta.allure.Allure.step;
 import static io.restassured.RestAssured.given;
@@ -22,7 +23,7 @@ public class GetUsersApiTests extends TestBase {
                                 .when()
                                 .get("users/2")
                                 .then()
-                                .spec(responseSpecSuccess)
+                                .spec(getResponseSpecification(200))
                                 .extract()
                                 .as(SingleUserBodyResponse.class)
                 );
@@ -39,6 +40,6 @@ public class GetUsersApiTests extends TestBase {
                 .when()
                 .get("users/23")
                 .then()
-                .spec(responseSpecNotFound);
+                .spec(getResponseSpecification(404));
     }
 }

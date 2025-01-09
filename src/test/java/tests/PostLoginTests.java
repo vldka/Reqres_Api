@@ -30,7 +30,7 @@ public class PostLoginTests extends TestBase {
                                 .when()
                                 .post("login")
                                 .then()
-                                .spec(responseSpecSuccess)
+                                .spec(getResponseSpecification(200))
                                 .extract()
                                 .as(LoginResponseBody.class));
         step("Проверяем token на заполнение", () ->
@@ -52,7 +52,7 @@ public class PostLoginTests extends TestBase {
                                 .post("login")
                                 .then()
                                 .log().body()
-                                .spec(responseSpecBadRequest)
+                                .spec(getResponseSpecification(400))
                                 .extract()
                                 .as(LoginResponseBody.class));
         step("Проверяем ошибку user not found", () ->
@@ -70,7 +70,7 @@ public class PostLoginTests extends TestBase {
                         .when()
                         .post("login")
                         .then()
-                        .spec(responseSpecBadRequest)
+                        .spec(getResponseSpecification(400))
                         .extract()
                         .as(LoginResponseBody.class);
         step("Проверяем ошибку Missing password", () ->
