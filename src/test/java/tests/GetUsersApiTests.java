@@ -1,6 +1,6 @@
 package tests;
 
-import models.lombok.singleUser.SingleUserResponse;
+import models.singleUser.SingleUserBodyResponse;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -8,23 +8,25 @@ import org.junit.jupiter.api.Test;
 import static io.qameta.allure.Allure.step;
 import static io.restassured.RestAssured.given;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static specs.BaseSpec.*;
+import static specs.BaseSpec.getResponseSpecification;
+import static specs.BaseSpec.requestSpec;
 
 @Tag("API-TEST")
 @DisplayName("Тестирование GET")
 public class GetUsersApiTests extends TestBase {
     @Test
+    @Tag("API-TEST")
     @DisplayName("Проверка Api GET Single User")
-    public void testGetRequestSuccefull() {
-        SingleUserResponse response =
+    public void getRequestSuccefullTest() {
+        SingleUserBodyResponse response =
                 step("Отправляем запрос на информацию о пользователе", () ->
                         given(requestSpec)
                                 .when()
                                 .get("users/2")
                                 .then()
-                                .spec(responseSpecSuccess)
+                                .spec(getResponseSpecification(200))
                                 .extract()
-                                .as(SingleUserResponse.class)
+                                .as(SingleUserBodyResponse.class)
                 );
         step("Проверяем поля id и text", () -> {
             assertEquals(2, response.getData().getId());
@@ -33,12 +35,15 @@ public class GetUsersApiTests extends TestBase {
     }
 
     @Test
+    @Tag("API-TEST")
     @DisplayName("Проверка Api GET Single User Отсутствует пользователь")
-    public void testGetRequestNotFoundUser() {
-        given(requestSpec)
-                .when()
-                .get("users/23")
-                .then()
-                .spec(responseSpecNotFound);
+    public void getRequestNotFoundUserTest() {
+        step("Проверка кода ошибки 404", () ->
+                given(requestSpec)
+                        .when()
+                        .get("users/23")
+                        .then()
+                        .spec(getResponseSpecification(404))
+        );
     }
 }

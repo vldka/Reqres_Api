@@ -1,8 +1,8 @@
 package tests;
 
 import io.restassured.http.ContentType;
-import models.lombok.login.LoginRequestBody;
-import models.lombok.login.LoginResponseBody;
+import models.login.LoginRequestBody;
+import models.login.LoginResponseBody;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -11,14 +11,16 @@ import static io.qameta.allure.Allure.step;
 import static io.restassured.RestAssured.given;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static specs.BaseSpec.*;
+import static specs.BaseSpec.getResponseSpecification;
+import static specs.BaseSpec.requestSpec;
 
 @Tag("API-TEST")
 @DisplayName("Тестирование Post")
 public class PostLoginTests extends TestBase {
     @Test
+    @Tag("API-TEST")
     @DisplayName("Проверка Api Post Login")
-    public void testPostRegistration() {
+    public void postRegistrationTest() {
         LoginRequestBody authData = new LoginRequestBody();
         authData.setEmail("eve.holt@reqres.in");
         authData.setPassword("cityslicka");
@@ -30,7 +32,7 @@ public class PostLoginTests extends TestBase {
                                 .when()
                                 .post("login")
                                 .then()
-                                .spec(responseSpecSuccess)
+                                .spec(getResponseSpecification(200))
                                 .extract()
                                 .as(LoginResponseBody.class));
         step("Проверяем token на заполнение", () ->
@@ -38,8 +40,9 @@ public class PostLoginTests extends TestBase {
     }
 
     @Test
+    @Tag("API-TEST")
     @DisplayName("Проверка Api Post Login Ошибка UserNotFound")
-    public void testPostRegistrationUserNotFound() {
+    public void postRegistrationUserNotFoundTest() {
         LoginRequestBody authData = new LoginRequestBody();
         authData.setEmail("eve.holt@reqres");
         authData.setPassword("cityslicka");
@@ -52,7 +55,7 @@ public class PostLoginTests extends TestBase {
                                 .post("login")
                                 .then()
                                 .log().body()
-                                .spec(responseSpecBadRequest)
+                                .spec(getResponseSpecification(400))
                                 .extract()
                                 .as(LoginResponseBody.class));
         step("Проверяем ошибку user not found", () ->
@@ -60,8 +63,9 @@ public class PostLoginTests extends TestBase {
     }
 
     @Test
+    @Tag("API-TEST")
     @DisplayName("Проверка Api Post Login Ошибка MissingPassword")
-    public void testPostRegistrationMissingPassword() {
+    public void postRegistrationMissingPasswordTest() {
         LoginRequestBody authData = new LoginRequestBody();
         authData.setEmail("peter@klaven");
         LoginResponseBody response =
@@ -70,7 +74,7 @@ public class PostLoginTests extends TestBase {
                         .when()
                         .post("login")
                         .then()
-                        .spec(responseSpecBadRequest)
+                        .spec(getResponseSpecification(400))
                         .extract()
                         .as(LoginResponseBody.class);
         step("Проверяем ошибку Missing password", () ->

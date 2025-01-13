@@ -17,15 +17,13 @@ public class BaseSpec {
             .log(LogDetail.HEADERS)
             .log(LogDetail.BODY)
             .build();
-    public static ResponseSpecification responseSpecSuccess = new ResponseSpecBuilder()
-            .expectStatusCode(200)
-            .build();
 
-    public static ResponseSpecification responseSpecBadRequest = new ResponseSpecBuilder()
-            .expectStatusCode(400)
-            .build();
+    public static ResponseSpecification getResponseSpecification(int responseCode) {
+        ResponseSpecification responseSpec = new ResponseSpecBuilder()
+                .expectStatusCode(responseCode)
+                .log(LogDetail.BODY)
+                .build();
+        return responseSpec;
+    }
 
-    public static ResponseSpecification responseSpecNotFound = new ResponseSpecBuilder()
-            .expectStatusCode(404)
-            .build();
 }
