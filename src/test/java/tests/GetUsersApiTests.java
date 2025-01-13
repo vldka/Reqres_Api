@@ -4,19 +4,20 @@ import models.singleUser.SingleUserBodyResponse;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
-import specs.BaseSpec;
 
 import static io.qameta.allure.Allure.step;
 import static io.restassured.RestAssured.given;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static specs.BaseSpec.*;
+import static specs.BaseSpec.getResponseSpecification;
+import static specs.BaseSpec.requestSpec;
 
 @Tag("API-TEST")
 @DisplayName("Тестирование GET")
 public class GetUsersApiTests extends TestBase {
     @Test
+    @Tag("API-TEST")
     @DisplayName("Проверка Api GET Single User")
-    public void testGetRequestSuccefull() {
+    public void getRequestSuccefullTest() {
         SingleUserBodyResponse response =
                 step("Отправляем запрос на информацию о пользователе", () ->
                         given(requestSpec)
@@ -34,12 +35,15 @@ public class GetUsersApiTests extends TestBase {
     }
 
     @Test
+    @Tag("API-TEST")
     @DisplayName("Проверка Api GET Single User Отсутствует пользователь")
-    public void testGetRequestNotFoundUser() {
-        given(requestSpec)
-                .when()
-                .get("users/23")
-                .then()
-                .spec(getResponseSpecification(404));
+    public void getRequestNotFoundUserTest() {
+        step("Проверка кода ошибки 404", () ->
+                given(requestSpec)
+                        .when()
+                        .get("users/23")
+                        .then()
+                        .spec(getResponseSpecification(404))
+        );
     }
 }

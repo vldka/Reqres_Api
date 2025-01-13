@@ -11,14 +11,16 @@ import static io.qameta.allure.Allure.step;
 import static io.restassured.RestAssured.given;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static specs.BaseSpec.*;
+import static specs.BaseSpec.getResponseSpecification;
+import static specs.BaseSpec.requestSpec;
 
 @Tag("API-TEST")
 @DisplayName("Тестирование Post")
 public class PostLoginTests extends TestBase {
     @Test
+    @Tag("API-TEST")
     @DisplayName("Проверка Api Post Login")
-    public void testPostRegistration() {
+    public void postRegistrationTest() {
         LoginRequestBody authData = new LoginRequestBody();
         authData.setEmail("eve.holt@reqres.in");
         authData.setPassword("cityslicka");
@@ -38,8 +40,9 @@ public class PostLoginTests extends TestBase {
     }
 
     @Test
+    @Tag("API-TEST")
     @DisplayName("Проверка Api Post Login Ошибка UserNotFound")
-    public void testPostRegistrationUserNotFound() {
+    public void postRegistrationUserNotFoundTest() {
         LoginRequestBody authData = new LoginRequestBody();
         authData.setEmail("eve.holt@reqres");
         authData.setPassword("cityslicka");
@@ -60,8 +63,9 @@ public class PostLoginTests extends TestBase {
     }
 
     @Test
+    @Tag("API-TEST")
     @DisplayName("Проверка Api Post Login Ошибка MissingPassword")
-    public void testPostRegistrationMissingPassword() {
+    public void postRegistrationMissingPasswordTest() {
         LoginRequestBody authData = new LoginRequestBody();
         authData.setEmail("peter@klaven");
         LoginResponseBody response =

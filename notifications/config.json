@@ -1,0 +1,17 @@
+{
+  "base": {
+    "project": "Wikipedia",
+    "environment": "wikipedia mobile",
+    "comment": "@vladka Autotest result",
+    "reportLink": "https://jenkins.autotests.cloud/job/Wikpedia_mobile/",
+    "language": "en",
+    "allureFolder": "allure-report",
+    "enableChart": true
+  },
+  "telegram": {
+    "token": "7906106385:AAHjU048wE-CVMfNCVcQsnX1mh1CAnjczGU",
+    "chat": "-1002174327049",
+    "replyTo": "",
+    "templatePath": "/templates/telegram.ftl"
+  }
+}
