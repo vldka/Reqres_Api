@@ -74,7 +74,7 @@
 
 ## <a name="Интеграция с Allure TestOps">**Интеграция с Allure TestOps**</a>
 
-Есть интеграция с [Allure TestOps](https://allure.autotests.cloud/project/4553/dashboards), где можно посмотреть еще
+Есть интеграция с [Allure TestOps](https://allure.autotests.cloud/project/4547/dashboards), где можно посмотреть еще
 ручные тесты
 
 <img src="images/tests/TestOps.png" width="900">
