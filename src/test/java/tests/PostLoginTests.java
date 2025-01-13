@@ -18,7 +18,6 @@ import static specs.BaseSpec.requestSpec;
 @DisplayName("Тестирование Post")
 public class PostLoginTests extends TestBase {
     @Test
-    @Tag("API-TEST")
     @DisplayName("Проверка Api Post Login")
     public void postRegistrationTest() {
         LoginRequestBody authData = new LoginRequestBody();
@@ -40,7 +39,6 @@ public class PostLoginTests extends TestBase {
     }
 
     @Test
-    @Tag("API-TEST")
     @DisplayName("Проверка Api Post Login Ошибка UserNotFound")
     public void postRegistrationUserNotFoundTest() {
         LoginRequestBody authData = new LoginRequestBody();
@@ -63,7 +61,6 @@ public class PostLoginTests extends TestBase {
     }
 
     @Test
-    @Tag("API-TEST")
     @DisplayName("Проверка Api Post Login Ошибка MissingPassword")
     public void postRegistrationMissingPasswordTest() {
         LoginRequestBody authData = new LoginRequestBody();

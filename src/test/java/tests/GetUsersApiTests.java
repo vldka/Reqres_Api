@@ -15,7 +15,6 @@ import static specs.BaseSpec.requestSpec;
 @DisplayName("Тестирование GET")
 public class GetUsersApiTests extends TestBase {
     @Test
-    @Tag("API-TEST")
     @DisplayName("Проверка Api GET Single User")
     public void getRequestSuccefullTest() {
         SingleUserBodyResponse response =
@@ -35,7 +34,6 @@ public class GetUsersApiTests extends TestBase {
     }
 
     @Test
-    @Tag("API-TEST")
     @DisplayName("Проверка Api GET Single User Отсутствует пользователь")
     public void getRequestNotFoundUserTest() {
         step("Проверка кода ошибки 404", () ->

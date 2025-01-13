@@ -9,6 +9,8 @@ import static io.restassured.RestAssured.given;
 import static specs.BaseSpec.getResponseSpecification;
 import static specs.BaseSpec.requestSpec;
 
+@Tag("API-TEST")
+@DisplayName("Тестирование Delete")
 public class DeleteUsersTests extends TestBase {
 
     @Test
