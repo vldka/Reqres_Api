@@ -1,6 +1,5 @@
 package tests;
 
-import io.restassured.http.ContentType;
 import models.login.LoginRequestBody;
 import models.login.LoginResponseBody;
 import org.junit.jupiter.api.DisplayName;
@@ -27,7 +26,6 @@ public class PostLoginTests extends TestBase {
                 step("Отправляем запрос на авторизацию", () ->
                         given(requestSpec)
                                 .body(authData)
-                                .contentType(ContentType.JSON)
                                 .when()
                                 .post("login")
                                 .then()
@@ -35,7 +33,7 @@ public class PostLoginTests extends TestBase {
                                 .extract()
                                 .as(LoginResponseBody.class));
         step("Проверяем token на заполнение", () ->
-                assertThat(response.getToken()).isNotNull());
+                assertThat(response.getToken()).isNotNull().hasSizeGreaterThan(10).isAlphanumeric());
     }
 
     @Test
@@ -49,10 +47,8 @@ public class PostLoginTests extends TestBase {
                         given(requestSpec)
                                 .body(authData)
                                 .when()
-                                .log().uri()
                                 .post("login")
                                 .then()
-                                .log().body()
                                 .spec(getResponseSpecification(400))
                                 .extract()
                                 .as(LoginResponseBody.class));

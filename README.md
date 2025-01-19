@@ -62,7 +62,7 @@
 ## <a name="Отчет в Allure">**Отчет в Allure**</a>
 
 После выполнения тестов можно посмотреть отчет
-в [Allure](https://jenkins.autotests.cloud/job/Wikpedia_mobile/12/allure/)
+в [Allure](https://jenkins.autotests.cloud/job/Reqres.in_api/8/allure/)
 
 ### На скриншоте один из результатов выполнения тестов:
 

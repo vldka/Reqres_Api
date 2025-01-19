@@ -16,7 +16,7 @@ public class DeleteUsersTests extends TestBase {
     @Test
     @Tag("API-TEST")
     @DisplayName("Проверка Api Delete User")
-    public void DeleteRequestSuccefullTest() {
+    public void deleteRequestSuccefullTest() {
         step("Проверяем успешное удаление с кодом 204", () ->
                 given(requestSpec)
                         .when()

@@ -13,15 +13,13 @@ public class BaseSpec {
     public static RequestSpecification requestSpec = new RequestSpecBuilder()
             .setContentType(JSON)
             .addFilter(withCustomTemplates())
-            .log(LogDetail.URI)
-            .log(LogDetail.HEADERS)
-            .log(LogDetail.BODY)
+            .log(LogDetail.ALL)
             .build();
 
     public static ResponseSpecification getResponseSpecification(int responseCode) {
         ResponseSpecification responseSpec = new ResponseSpecBuilder()
                 .expectStatusCode(responseCode)
-                .log(LogDetail.BODY)
+                .log(LogDetail.ALL)
                 .build();
         return responseSpec;
     }
